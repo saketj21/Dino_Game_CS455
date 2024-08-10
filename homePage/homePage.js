@@ -1,19 +1,28 @@
+import Ground from "../ground/ground.js";
+
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 300;
+const GROUND_WIDTH = 2400;
+const GROUND_HEIGHT = 24;
+const GAME_SPEED = 1.0;
+const GAME_SPEED_INCREASE = 0.00001;
 
 let scaleRatio=1;
 let previousTime = null;
 let notStarted = true;
 let gameOver = false;
+let ground = null;
+let gameSpeed = GAME_SPEED;
 
 
 function setScreenSize() {
     scaleRatio = setScaleRatio();
     canvas.width=GAME_WIDTH*scaleRatio;
     canvas.height=GAME_HEIGHT*scaleRatio;
+    objectOnHomeScreen();
 }
 
 setScreenSize();
@@ -58,7 +67,9 @@ function gameLoop(currentTime){
   
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  console.log("game loop");
+
+  ground.draw();
+  ground.update(gameSpeed, frameTimeDelta);
 
   if(notStarted){
     showStartGame();
@@ -70,6 +81,13 @@ function gameLoop(currentTime){
 
   requestAnimationFrame(gameLoop);
 
+}
+
+function objectOnHomeScreen() {
+  const groundWidth=GROUND_WIDTH*scaleRatio;
+  const groundHeight=GROUND_HEIGHT*scaleRatio;
+
+  ground = new Ground(ctx, groundWidth, groundHeight, scaleRatio);
 }
 
 requestAnimationFrame(gameLoop);
