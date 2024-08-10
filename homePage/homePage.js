@@ -7,12 +7,15 @@ const GAME_WIDTH = 800;
 const GAME_HEIGHT = 300;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
+const GAME_SPEED = 1.0;
+const GAME_SPEED_INCREASE = 0.00001;
 
 let scaleRatio=1;
 let previousTime = null;
 let notStarted = true;
 let gameOver = false;
 let ground = null;
+let gameSpeed = GAME_SPEED;
 
 
 function setScreenSize() {
@@ -66,6 +69,7 @@ function gameLoop(currentTime){
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ground.draw();
+  ground.update(gameSpeed, frameTimeDelta);
 
   if(notStarted){
     showStartGame();
