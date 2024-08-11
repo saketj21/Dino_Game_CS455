@@ -4,8 +4,8 @@ export default class Dino{
         this.canvas = ctx.canvas;
         this.width = width / scaleRatio;
         this.height = height / scaleRatio;
-        this.x = 20;
-        this.y = this.canvas.height - height + 75;
+        this.x = 20 * scaleRatio;
+        this.y = this.canvas.height - height + 75 * scaleRatio;
         this.image = new Image();
         this.image.src = "../dino/dino_run_2.png";
     }
