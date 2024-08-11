@@ -1,10 +1,13 @@
 import Ground from "../ground/ground.js";
+import Dino from "../dino/dino.js";
 
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 300;
+const DINO_HEIGHT = 200;
+const DINO_WIDTH = 200;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
 const GAME_SPEED = 1.0;
@@ -15,6 +18,7 @@ let previousTime = null;
 let notStarted = true;
 let gameOver = false;
 let ground = null;
+let dino = null;
 let gameSpeed = GAME_SPEED;
 
 
@@ -69,6 +73,7 @@ function gameLoop(currentTime){
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ground.draw();
+  dino.draw()
   ground.update(gameSpeed, frameTimeDelta);
 
   if(notStarted){
@@ -88,6 +93,8 @@ function objectOnHomeScreen() {
   const groundHeight=GROUND_HEIGHT*scaleRatio;
 
   ground = new Ground(ctx, groundWidth, groundHeight, scaleRatio);
+
+  dino = new Dino(ctx, DINO_WIDTH, DINO_HEIGHT, scaleRatio);
 }
 
 requestAnimationFrame(gameLoop);
