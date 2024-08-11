@@ -75,6 +75,7 @@ function gameLoop(currentTime){
   ground.draw();
   dino.draw()
   ground.update(gameSpeed, frameTimeDelta);
+  dino.update(frameTimeDelta)
 
   if(notStarted){
     showStartGame();
