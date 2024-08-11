@@ -17,4 +17,27 @@ function run(dino, frameTimeDelta){
     }
 }
 
-export { run };
+function jump(dino, frameTimeDelta){
+    if(dino.jumping){
+        dino.image_no = 1;
+    }
+
+    if(dino.y >= dino.standingy){
+        dino.jumping = false;
+        dino.y = dino.standingy;
+    }
+
+    if(dino.jumpPressed && !dino.jumping){
+        dino.sinceJump = 0;
+        dino.jumping = true;
+    }
+
+    dino.sinceJump += frameTimeDelta/15;
+
+    if(dino.jumping){
+        dino.y = dino.standingy - dino.scaleRatio * (dino.initialVelocity * dino.sinceJump - dino.gravity * (dino.sinceJump ** 2) / 2);
+    }
+
+}
+
+export { run, jump };
