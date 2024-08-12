@@ -1,8 +1,8 @@
-import Ground from "../ground/ground.js";
-import Dino from "../dino/dino.js";
-import Obstacle from "../obstacle/obstacle.js";
-import ObstacleController from "../obstacle/controller.js"
-import Score from "../score/Score.js";
+import Ground from "./ground/ground.js";
+import Dino from "./dino/dino.js";
+import Obstacle from "./obstacle/obstacle.js";
+import ObstacleController from "./obstacle/controller.js"
+import Score from "./score/Score.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -40,6 +40,11 @@ function setScreenSize() {
     objectOnHomeScreen();
 }
 
+let groundImage = new Image();
+groundImage.src = "../ground/ground.png";
+let backgroundImage = new Image();
+backgroundImage.src = "../background/background.png";
+await backgroundImage.decode();
 setScreenSize();
 
 function setScaleRatio() {
@@ -72,10 +77,6 @@ function showGameOver() {
 }
 
 function objectOnHomeScreen() {
-  let groundImage = new Image();
-  groundImage.src = "../ground/ground.png";
-  let backgroundImage = new Image();
-  backgroundImage.src = "../background/background.png";
 
 
   const groundWidth=GROUND_WIDTH * scaleRatio;
@@ -156,7 +157,6 @@ function gameLoop(currentTime){
   requestAnimationFrame(gameLoop);
 
 }
-
 requestAnimationFrame(gameLoop);
 
 window.addEventListener("keyup", reset, { once: true });
