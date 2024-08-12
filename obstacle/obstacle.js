@@ -7,8 +7,8 @@ export default class Obstacle{
         this.scalingRatio = scalingRatio
         this.image = new Image();
         this.image.src = "../obstacle/obstacle.png";
-        this.x = x;
-        this.y = y;
+        this.x = -this.canvas.width;
+        this.y = this.canvas.height - this.height;
     }
 
     draw(){
