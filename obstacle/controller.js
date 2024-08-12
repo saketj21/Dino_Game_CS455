@@ -13,9 +13,10 @@ export default class ObstacleController {
     }
 
     update(obstacle, gameSpeed, frameTimeDelta){
-        if(this.obstacleTimer <= 0 && obstacle.x <= -0.5 * this.canvas.width){
+        if(this.obstacleTimer <= 0 && obstacle.x <= -obstacle.width){
             obstacle.x = this.canvas.width * 2;
             this.obstacleTimer = Math.floor(Math.random() * 1000 + 1000);
+            obstacle.image_no = Math.floor(Math.random() * obstacle.numObstacles);
         }
 
         this.obstacleTimer -= frameTimeDelta;
