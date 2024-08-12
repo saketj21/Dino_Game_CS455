@@ -11,7 +11,7 @@ const DINO_HEIGHT = 100;
 const DINO_WIDTH = 100;
 const OBSTACLE_WIDTH = 100;
 const OBSTACLE_HEIGHT = 100;
-const GROUND_WIDTH = 2400;
+const GROUND_WIDTH = 1000;
 const GROUND_HEIGHT = 24;
 const GAME_SPEED = 1.0;
 const GAME_SPEED_INCREASE = 0.00001;
@@ -24,6 +24,9 @@ let ground = null;
 let dino = null;
 let obstacle = null;
 let gameSpeed = GAME_SPEED;
+
+var background = new Image();
+background.src = "../bg.jpeg";
 
 
 function setScreenSize() {
@@ -76,6 +79,7 @@ function gameLoop(currentTime){
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  ctx.drawImage(background,0,0,background.width * 8/3 * 1152 / 2048 * canvas.height / background.height, canvas.height);
   ground.draw();
   dino.draw();
   obstacle.draw();
