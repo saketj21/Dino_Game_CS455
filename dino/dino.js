@@ -23,14 +23,14 @@ export default class Dino{
         this.image_no = 1;
         this.forward = true;
 
-        const run1Img = new Image();
+        let run1Img = new Image();
         run1Img.src = "./dino_run_1.png";
 
-        const run2Img = new Image();
+        let run2Img = new Image();
         run2Img.src = "./dino_run_2.png";
         console.log(run2Img.src);
 
-        const run3Img = new Image();
+        let run3Img = new Image();
         run3Img.src = "./dino_run_3.png";
 
         this.runImages.push(run1Img);
