@@ -93,7 +93,9 @@ function reset() {
 function resetEventListeners() {
   if(!eventListenerReset){
     eventListenerReset = true;
-    window.addEventListener("keyup", reset, { once: true });
+    setTimeout(() => {
+      window.addEventListener("keyup", reset, { once: true });
+    }, 1000);
   }
 }
 
