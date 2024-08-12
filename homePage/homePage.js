@@ -1,6 +1,7 @@
 import Ground from "../ground/ground.js";
 import Dino from "../dino/dino.js";
 import Obstacle from "../obstacle/obstacle.js";
+import ObstacleController from "../obstacle/controller.js"
 
 
 const canvas = document.getElementById("game");
@@ -23,6 +24,7 @@ let gameOver = false;
 let ground = null;
 let dino = null;
 let obstacle = null;
+let obstaclecontroller = null;
 let gameSpeed = GAME_SPEED;
 
 var background = new Image();
@@ -85,6 +87,7 @@ function gameLoop(currentTime){
   obstacle.draw();
   ground.update(gameSpeed, frameTimeDelta);
   dino.update(frameTimeDelta)
+  obstaclecontroller.update(obstacle, gameSpeed, frameTimeDelta);
 
   if(notStarted){
     showStartGame();
@@ -107,6 +110,8 @@ function objectOnHomeScreen() {
   dino = new Dino(ctx, DINO_WIDTH, DINO_HEIGHT, scaleRatio);
 
   obstacle = new Obstacle(ctx, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, scaleRatio, 300, 300);
+
+  obstaclecontroller = new ObstacleController(ctx, scaleRatio, GAME_SPEED);
 }
 
 requestAnimationFrame(gameLoop);
