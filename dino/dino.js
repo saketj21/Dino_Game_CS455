@@ -28,6 +28,7 @@ export default class Dino{
 
         const run2Img = new Image();
         run2Img.src = "./dino/dino_run_2.png";
+        console.log(run2Img.src);
 
         const run3Img = new Image();
         run3Img.src = "./dino/dino_run_3.png";
