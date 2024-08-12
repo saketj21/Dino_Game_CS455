@@ -1,5 +1,6 @@
 import Ground from "../ground/ground.js";
 import Dino from "../dino/dino.js";
+import Obstacle from "../obstacle/obstacle.js";
 
 
 const canvas = document.getElementById("game");
@@ -8,6 +9,8 @@ const GAME_WIDTH = 800;
 const GAME_HEIGHT = 300;
 const DINO_HEIGHT = 100;
 const DINO_WIDTH = 100;
+const OBSTACLE_WIDTH = 100;
+const OBSTACLE_HEIGHT = 100;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
 const GAME_SPEED = 1.0;
@@ -19,6 +22,7 @@ let notStarted = true;
 let gameOver = false;
 let ground = null;
 let dino = null;
+let obstacle = null;
 let gameSpeed = GAME_SPEED;
 
 
@@ -73,7 +77,8 @@ function gameLoop(currentTime){
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ground.draw();
-  dino.draw()
+  dino.draw();
+  obstacle.draw();
   ground.update(gameSpeed, frameTimeDelta);
   dino.update(frameTimeDelta)
 
@@ -96,6 +101,8 @@ function objectOnHomeScreen() {
   ground = new Ground(ctx, groundWidth, groundHeight, scaleRatio);
 
   dino = new Dino(ctx, DINO_WIDTH, DINO_HEIGHT, scaleRatio);
+
+  obstacle = new Obstacle(ctx, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, scaleRatio, 300, 300);
 }
 
 requestAnimationFrame(gameLoop);
