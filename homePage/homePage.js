@@ -2,7 +2,7 @@ import Ground from "../ground/ground.js";
 import Dino from "../dino/dino.js";
 import Obstacle from "../obstacle/obstacle.js";
 import ObstacleController from "../obstacle/controller.js"
-
+import Score from "../score/Score.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -15,7 +15,6 @@ const OBSTACLE_HEIGHT = 100;
 const GROUND_WIDTH = 1000;
 const GROUND_HEIGHT = 24;
 const GAME_SPEED = 1.0;
-const GAME_SPEED_INCREASE = 0.00001;
 
 let scaleRatio=1;
 let previousTime = null;
@@ -27,6 +26,7 @@ let obstacle = null;
 let obstaclecontroller = null;
 let gameSpeed = GAME_SPEED;
 let eventListenerReset = false;
+let score = null;
 
 var background = new Image();
 background.src = "../bg.jpeg";
@@ -58,7 +58,7 @@ function showStartGame() {
   ctx.fillStyle = "grey";
   const x = canvas.width / 14;
   const y = canvas.height / 2;
-  ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  ctx.fillText("Press Space To Start", x, y);
 }
 
 function showGameOver() {
@@ -81,6 +81,8 @@ function objectOnHomeScreen() {
   obstacle = new Obstacle(ctx, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, scaleRatio, 300, 300);
 
   obstaclecontroller = new ObstacleController(ctx, scaleRatio, GAME_SPEED);
+
+  score = new Score(ctx, scaleRatio);
 }
 
 function reset() {
@@ -88,6 +90,8 @@ function reset() {
   obstacle.x = -canvas.width;
   gameOver = false;
   eventListenerReset = false;
+  ground.reset();
+  score.reset();
 }
 
 function resetEventListeners() {
@@ -95,6 +99,7 @@ function resetEventListeners() {
     eventListenerReset = true;
     setTimeout(() => {
       window.addEventListener("keyup", reset, { once: true });
+      window.addEventListener("touchstart", reset, { once: true });
     }, 1000);
   }
 }
@@ -112,16 +117,19 @@ function gameLoop(currentTime){
   ground.draw();
   dino.draw();
   obstacle.draw();
+  score.draw();
 
   if(!notStarted && !gameOver){
     ground.update(gameSpeed, frameTimeDelta);
     dino.update(frameTimeDelta)
     obstaclecontroller.update(obstacle, gameSpeed, frameTimeDelta);
+    score.update(frameTimeDelta);
   }
 
   if(obstacle.collideWith(dino)){
     gameOver = true;
     resetEventListeners();
+    score.setHighScore();
   }
 
   if(notStarted){
@@ -139,3 +147,4 @@ function gameLoop(currentTime){
 requestAnimationFrame(gameLoop);
 
 window.addEventListener("keyup", reset, { once: true });
+window.addEventListener("touchstart", reset, { once: true });
