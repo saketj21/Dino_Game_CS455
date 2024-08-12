@@ -14,6 +14,8 @@ const OBSTACLE_WIDTH = 100;
 const OBSTACLE_HEIGHT = 100;
 const GROUND_WIDTH = 1000;
 const GROUND_HEIGHT = 24;
+const BACKGROUND_HEIGHT = GAME_HEIGHT;
+const BACKGROUND_SPEED = 0.1;
 const GAME_SPEED = 1.0;
 const GAME_SPEED_INCREASE = 0.00001;
 
@@ -22,14 +24,12 @@ let previousTime = null;
 let notStarted = true;
 let gameOver = false;
 let ground = null;
+let background = null;
 let dino = null;
 let obstacle = null;
 let obstaclecontroller = null;
 let gameSpeed = GAME_SPEED;
 let eventListenerReset = false;
-
-var background = new Image();
-background.src = "../bg.jpeg";
 
 
 function setScreenSize() {
@@ -71,10 +71,21 @@ function showGameOver() {
 }
 
 function objectOnHomeScreen() {
-  const groundWidth=GROUND_WIDTH*scaleRatio;
-  const groundHeight=GROUND_HEIGHT*scaleRatio;
+  let groundImage = new Image();
+  groundImage.src = "../ground/ground.png";
+  let backgroundImage = new Image();
+  backgroundImage.src = "../background/background.png";
 
-  ground = new Ground(ctx, groundWidth, groundHeight, scaleRatio);
+
+  const groundWidth=GROUND_WIDTH * scaleRatio;
+  const groundHeight=GROUND_HEIGHT * scaleRatio;
+  const backgroundHeight = BACKGROUND_HEIGHT * scaleRatio;
+  const backgroundWidth = backgroundHeight / backgroundImage.height * backgroundImage.width;
+
+
+  ground = new Ground(ctx, groundWidth, groundHeight, scaleRatio, groundImage);
+
+  background = new Ground(ctx, backgroundWidth, backgroundHeight, scaleRatio, backgroundImage);
 
   dino = new Dino(ctx, DINO_WIDTH, DINO_HEIGHT, scaleRatio);
 
@@ -106,14 +117,15 @@ function gameLoop(currentTime){
     return;
   }
   const frameTimeDelta = currentTime - previousTime;
-  previousTime = currentTime;
+  previousTime = currentTime; 
 
-  ctx.drawImage(background,0,0,background.width * 8/3 * 1152 / 2048 * canvas.height / background.height, canvas.height);
+  background.draw();
   ground.draw();
   dino.draw();
   obstacle.draw();
 
   if(!notStarted && !gameOver){
+    background.update(BACKGROUND_SPEED, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
     dino.update(frameTimeDelta)
     obstaclecontroller.update(obstacle, gameSpeed, frameTimeDelta);
