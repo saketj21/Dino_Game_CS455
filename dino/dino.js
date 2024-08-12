@@ -1,4 +1,4 @@
-import { run, jump } from "../dino/move.js"
+import { run, jump } from "./move.js"
 
 export default class Dino{
 
@@ -23,14 +23,14 @@ export default class Dino{
         this.image_no = 1;
         this.forward = true;
 
-        const run1Img = new Image();
-        run1Img.src = "../dino/dino_run_1.png";
+        let run1Img = new Image();
+        run1Img.src = "./dino/dino_run_1.png";
 
-        const run2Img = new Image();
-        run2Img.src = "../dino/dino_run_2.png";
+        let run2Img = new Image();
+        run2Img.src = "./dino/dino_run_2.png";
 
-        const run3Img = new Image();
-        run3Img.src = "../dino/dino_run_3.png";
+        let run3Img = new Image();
+        run3Img.src = "./dino/dino_run_3.png";
 
         this.runImages.push(run1Img);
         this.runImages.push(run2Img);
