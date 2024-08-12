@@ -41,9 +41,9 @@ function setScreenSize() {
 }
 
 let groundImage = new Image();
-groundImage.src = "../ground/ground.png";
+groundImage.src = "./ground/ground.png";
 let backgroundImage = new Image();
-backgroundImage.src = "../background/background.png";
+backgroundImage.src = "./background/background.png";
 await backgroundImage.decode();
 setScreenSize();
 
