@@ -18,6 +18,7 @@ const BACKGROUND_HEIGHT = GAME_HEIGHT;
 const BACKGROUND_SPEED = 0.1;
 const GAME_SPEED = 1.0;
 const GAME_SPEED_INCREASE = 0.00001;
+const OBSTACLES_NUMBER = 5;
 
 let scaleRatio=1;
 let previousTime = null;
@@ -89,7 +90,7 @@ function objectOnHomeScreen() {
 
   dino = new Dino(ctx, DINO_WIDTH, DINO_HEIGHT, scaleRatio);
 
-  obstacle = new Obstacle(ctx, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, scaleRatio, 300, 300);
+  obstacle = new Obstacle(ctx, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, scaleRatio, 0, 0, OBSTACLES_NUMBER);
 
   obstaclecontroller = new ObstacleController(ctx, scaleRatio, GAME_SPEED);
 }

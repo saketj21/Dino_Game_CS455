@@ -1,22 +1,30 @@
 export default class Obstacle{
-    constructor(ctx, width, height, scalingRatio, x, y){
+    images = []
+
+    constructor(ctx, width, height, scalingRatio, x, y, numObstacles){
         this.ctx = ctx;
         this.canvas = this.ctx.canvas;
         this.height = height * scalingRatio;
         this.width = width * scalingRatio;
-        this.scalingRatio = scalingRatio
-        this.image = new Image();
-        this.image.src = "../obstacle/obstacle.png";
+        this.scalingRatio = scalingRatio;
+        this.numObstacles = numObstacles;
+        for(let i = 1; i <= this.numObstacles; i++){
+            let image = new Image();
+            image.src =  "../obstacle/obstacle_" + i + ".png";
+            console.log(image.src);
+            this.images.push(image);
+        }
+        this.image_no = 0;
         this.x = -this.canvas.width;
         this.y = this.canvas.height - this.height;
     }
 
     draw(){
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.images[this.image_no], this.x, this.y, this.width, this.height);
     }
 
     collideWith(sprite) {
-        const adjustByX = 1.95, adjustByY = 1.2;
+        const adjustByX = 2.5, adjustByY = 1.2;
         if (
           sprite.x < this.x + this.width / adjustByX &&
           sprite.x + sprite.width / adjustByX > this.x &&
