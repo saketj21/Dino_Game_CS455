@@ -1,4 +1,4 @@
-import { run, jump } from "./dino/move.js"
+import { run, jump } from "./move.js"
 
 export default class Dino{
 
