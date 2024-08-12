@@ -14,4 +14,18 @@ export default class Obstacle{
     draw(){
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
+
+    collideWith(sprite) {
+        const adjustByX = 1.95, adjustByY = 1.2;
+        if (
+          sprite.x < this.x + this.width / adjustByX &&
+          sprite.x + sprite.width / adjustByX > this.x &&
+          sprite.y < this.y + this.height / adjustByY &&
+          sprite.height + sprite.y / adjustByY > this.y
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
 }
