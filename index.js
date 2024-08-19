@@ -62,18 +62,23 @@ function showStartGame() {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
   ctx.fillStyle = "grey";
-  const x = canvas.width / 14;
-  const y = canvas.height / 2;
-  ctx.fillText("Press Space To Start", x, y);
+  const text = "Press Space To Start";
+  const textWidth = ctx.measureText(text).width;
+  const x = (canvas.width - textWidth) / 2;
+  const y = (canvas.height + fontSize) / 2; 
+
+  ctx.fillText(text, x, y);
 }
 
 function showGameOver() {
   const fontSize = 70 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
   ctx.fillStyle = "grey";
-  const x = canvas.width / 4.5;
-  const y = canvas.height / 2;
-  ctx.fillText("GAME OVER", x, y);
+  const text = "GAME OVER";
+  const textWidth = ctx.measureText(text).width;
+  const x = (canvas.width - textWidth) / 2;
+  const y = (canvas.height + fontSize) / 2;
+  ctx.fillText(text, x, y);
 }
 
 function objectOnHomeScreen() {
