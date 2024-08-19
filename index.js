@@ -61,7 +61,7 @@ function setScaleRatio() {
 function showStartGame() {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
-  ctx.fillStyle = "grey";
+  ctx.fillStyle = "black";
   const text = "Press Space To Start";
   const textWidth = ctx.measureText(text).width;
   const x = (canvas.width - textWidth) / 2;
@@ -73,7 +73,7 @@ function showStartGame() {
 function showGameOver() {
   const fontSize = 70 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
-  ctx.fillStyle = "grey";
+  ctx.fillStyle = "black";
   const text = "GAME OVER";
   const textWidth = ctx.measureText(text).width;
   const x = (canvas.width - textWidth) / 2;
