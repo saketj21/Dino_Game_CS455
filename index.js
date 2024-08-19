@@ -47,6 +47,8 @@ backgroundImage.src = "./background/background.png";
 await backgroundImage.decode();
 setScreenSize();
 
+window.addEventListener("resize", () => setTimeout(setScreenSize, 500));
+
 function setScaleRatio() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
