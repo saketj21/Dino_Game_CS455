@@ -118,7 +118,11 @@ function resetEventListeners() {
   if(!eventListenerReset){
     eventListenerReset = true;
     setTimeout(() => {
-      window.addEventListener("keyup", reset, { once: true });
+      window.addEventListener("keyup", (event) => {
+        if (event.key === ' ') {
+          reset();
+        }
+      }, { once: true });
       window.addEventListener("touchstart", reset, { once: true });
     }, 1000);
   }
@@ -166,5 +170,9 @@ function gameLoop(currentTime){
 }
 requestAnimationFrame(gameLoop);
 
-window.addEventListener("keyup", reset, { once: true });
+window.addEventListener("keyup", (event) => {
+  if (event.key === ' ') {
+    reset();
+  }
+}, { once: true });
 window.addEventListener("touchstart", reset, { once: true });
