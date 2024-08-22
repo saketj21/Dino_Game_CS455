@@ -10,15 +10,19 @@
         padding: 0px;
         margin: 0px;
       }
-      body {
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent scrollbars */
+        width: 100%;
+        height: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
-        flex-direction: column;
-        height: 100vh;
+        align-items: center;
       }
+
       canvas {
-        border: 0.1px solid grey;
+        display: block; /* Remove any inline-block spacing */
       }
     </style>
     <script src="index.js" defer type="module"></script>
