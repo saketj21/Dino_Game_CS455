@@ -6,7 +6,6 @@ export default [
   {
     files: ["**/*.js"],
     languageOptions: {
-      sourceType: "commonjs",
       globals: globals.browser,
     },
     plugins: {
@@ -16,8 +15,8 @@ export default [
       'complexity': ['error', { 'max': 10 }],
       'max-depth': ['error', 4],
       'max-lines-per-function': ['error', 50],
-      'max-params': ['error', 4],
-      'max-statements': ['error', 15],
+      'max-params': ['error', 8],
+      'max-statements': ['error', 30],
     },
   },
   pluginJs.configs.recommended

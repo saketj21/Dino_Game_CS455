@@ -1,5 +1,3 @@
-import Obstacle from "./obstacle.js"
-
 export default class ObstacleController {
     obstacleTimer = null;
 
