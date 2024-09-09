@@ -2,12 +2,20 @@
   "name": "Dino_Game_CS455",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest"
+    "lint:js": "eslint .",
+    "lint:css": "stylelint '/*.css'",
+    "lint:html": "htmlhint '/*.html'",
+    "check:duplication": "jscpd --min-lines 6 ./Game index.html"
   },
+
   "devDependencies": {
-    "@eslint/js": "^9.10.0",
-    "eslint": "^9.10.0",
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "eslint-plugin-complexity": "^1.0.2",
     "globals": "^15.9.0",
-    "jest": "^29.7.0"
-  }
+    "htmlhint": "^1.1.4",
+    "jscpd": "^4.0.5",
+    "stylelint": "^16.9.0"
+  }
+
 }
