@@ -23,4 +23,4 @@ jobs:
         run: npm install
 
       - name: Run ESLint
-        run: sudo npm run lint
+        run: sudo npx lint
