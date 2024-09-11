@@ -1,4 +1,4 @@
-import Score from './../score/Score.js';
+import Score from '../src/score/Score';
 
 describe('Score', () => {
   let ctx;
@@ -11,6 +11,14 @@ describe('Score', () => {
       fillText: jest.fn(), // Mock the fillText method
     };
     score = new Score(ctx, 1);
+  });
+
+  test('constructor initializes properties correctly', () => {
+    expect(score.ctx).toBe(ctx);
+    expect(score.scaleRatio).toBe(1);
+    expect(score.score).toBe(0);
+    expect(score.highScore).toBe(0);
+    expect(score.HIGH_SCORE_KEY).toBe('highScore');
   });
 
   test('initial score should be 0', () => {
@@ -40,5 +48,16 @@ describe('Score', () => {
     score.update(100); // This should set score to 1
     score.setHighScore();
     expect(Number(localStorage.getItem(score.HIGH_SCORE_KEY))).toBe(50);
+  });
+
+  test('draw method should call ctx.fillText with correct arguments', () => {
+    score.update(100);
+    score.draw();
+    expect(ctx.fillText).toHaveBeenCalledWith('Score: 1', 10, 50);
+  });
+
+  test('getHighScore should retrieve high score from localStorage', () => {
+    localStorage.setItem(score.HIGH_SCORE_KEY, '50');
+    expect(score.getHighScore()).toBe(50);
   });
 });

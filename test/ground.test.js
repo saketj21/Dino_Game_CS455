@@ -1,4 +1,4 @@
-import Ground from './../ground/ground.js';
+import Ground from '../src/ground/ground';
 
 describe('Ground', () => {
   let ctx;
