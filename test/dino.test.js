@@ -1,9 +1,9 @@
-import Dino from '../src/dino/dino.js'; // Adjust the path to the Dino class
+import Dino from '../src/dino/dino.js';
 
 jest.mock('../src/dino/move', () => ({
   run: jest.fn(),
   jump: jest.fn(),
-})); // Adjust the path to the move module
+})); 
 
 import { run, jump } from '../src/dino/move';
 
@@ -15,7 +15,6 @@ describe('Dino', () => {
   const scaleRatio = 1;
 
   beforeEach(() => {
-    // Mock the canvas context
     ctx = {
       canvas: {
         height: 600,
@@ -38,7 +37,7 @@ describe('Dino', () => {
     expect(dino.forward).toBe(true);
     expect(dino.TIMER).toBe(75);
     expect(dino.walkTimer).toBe(dino.TIMER);
-    expect(dino.runImages.length).toBe(3); // Adjust the expected value
+    expect(dino.runImages.length).toBe(3); 
     expect(dino.jumping).toBe(false);
     expect(dino.jumpPressed).toBe(false);
     expect(dino.sinceJump).toBe(0);
