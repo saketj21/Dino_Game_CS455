@@ -1,4 +1,4 @@
-import Ground from '../src/ground/ground';
+import Ground from '../ground/ground';
 
 describe('Ground', () => {
   let ctx;

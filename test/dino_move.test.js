@@ -1,4 +1,4 @@
-import { run } from '../src/dino/move';
+import { run } from '../dino/move';
 
 describe('run function', () => {
   let dino;

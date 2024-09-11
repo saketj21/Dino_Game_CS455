@@ -1,11 +1,11 @@
-import Dino from '../src/dino/dino.js';
+import Dino from '../dino/dino.js';
 
-jest.mock('../src/dino/move', () => ({
+jest.mock('../dino/move', () => ({
   run: jest.fn(),
   jump: jest.fn(),
 })); 
 
-import { run, jump } from '../src/dino/move';
+import { run, jump } from '../dino/move';
 
 describe('Dino', () => {
   let ctx;

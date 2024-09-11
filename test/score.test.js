@@ -1,4 +1,4 @@
-import Score from '../src/score/Score';
+import Score from '../score/Score';
 
 describe('Score', () => {
   let ctx;
