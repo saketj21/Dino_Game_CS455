@@ -44,7 +44,9 @@ let groundImage = new Image();
 groundImage.src = "./ground/ground.png";
 let backgroundImage = new Image();
 backgroundImage.src = "./background/background.png";
-await backgroundImage.decode();
+async function loadBackgroundImage() {
+  await backgroundImage.decode();
+}
 setScreenSize();
 
 window.addEventListener("resize", () => setTimeout(setScreenSize, 500));
@@ -60,7 +62,7 @@ function setScaleRatio() {
       }
 }
 
-function showStartGame() {
+export function showStartGame() {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
   ctx.fillStyle = "black";
@@ -176,3 +178,4 @@ window.addEventListener("keyup", (event) => {
   }
 }, { once: true });
 window.addEventListener("touchstart", reset, { once: true });
+module.exports = {setScaleRatio,GAME_WIDTH,GAME_HEIGHT};
