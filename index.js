@@ -44,9 +44,7 @@ let groundImage = new Image();
 groundImage.src = "./ground/ground.png";
 let backgroundImage = new Image();
 backgroundImage.src = "./background/background.png";
-async function loadBackgroundImage() {
-  await backgroundImage.decode();
-}
+await backgroundImage.decode();
 setScreenSize();
 
 window.addEventListener("resize", () => setTimeout(setScreenSize, 500));
