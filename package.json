@@ -6,19 +6,21 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "prepare-reports-dir": "mkdir -p reports",
+    "duplication": "npm run prepare-reports-dir && npx jscpd --pattern '**/*.js' --ignore '**/node_modules/**' --min-lines 10 --reporters console --reporters json --output reports/jscpd-report.json"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
+    "babel-jest": "^29.7.0",
     "eslint": "^9.10.0",
     "eslint-plugin-complexity": "^1.0.2",
-    "babel-jest": "^29.7.0",
     "globals": "^15.9.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jscpd": "^4.0.5",
     "jsdom": "^25.0.0"
-
   },
   "jest": {
     "testEnvironment": "jsdom",
