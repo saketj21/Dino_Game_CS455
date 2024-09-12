@@ -14,4 +14,5 @@ steps to know more about that test/metric. For Code Duplication metric you can c
 `npm run duplication`
 
 and the reports are saved to a file name jscpd-report.json in report folder, for other metrics/tests you can directly
-check in github actions to find all details
+check in github actions to find all details. For ex. you can find test coverage metric in `Run jest` step of code
+quality metrics described in GitHub Actions
