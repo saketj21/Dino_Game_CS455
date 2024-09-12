@@ -30,3 +30,6 @@ jobs:
 
       - name: Run Code Duplication Check
         run: npn run duplication
+      
+      - name: Run Jest
+        run: npm test
