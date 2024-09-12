@@ -27,3 +27,6 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: Run Code Duplication Check
+        run: npn run duplication
