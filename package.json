@@ -10,6 +10,9 @@
     "prepare-reports-dir": "mkdir -p reports",
     "duplication": "npm run prepare-reports-dir && npx jscpd --pattern '**/*.js' --ignore '**/node_modules/**' --min-lines 10 --reporters console --reporters json --output reports/jscpd-report.json"
   },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
