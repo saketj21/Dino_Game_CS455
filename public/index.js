@@ -105,7 +105,7 @@ function objectOnHomeScreen() {
   score = new Score(ctx, scaleRatio);
 }
 
-function reset() {
+export function reset() {
   notStarted = false;
   obstacle.x = -canvas.width;
   gameOver = false;
@@ -128,14 +128,15 @@ function resetEventListeners() {
   }
 }
 
-function gameLoop(currentTime){
+export function gameLoop(currentTime) {
   if (previousTime === null) {
     previousTime = currentTime;
     requestAnimationFrame(gameLoop);
     return;
   }
+
   const frameTimeDelta = currentTime - previousTime;
-  previousTime = currentTime; 
+  previousTime = currentTime;
 
   background.draw();
   ground.draw();
@@ -143,37 +144,27 @@ function gameLoop(currentTime){
   obstacle.draw();
   score.draw();
 
-  if(!notStarted && !gameOver){
+  if (!notStarted && !gameOver) {
     background.update(BACKGROUND_SPEED, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
-    dino.update(frameTimeDelta)
+    dino.update(frameTimeDelta);
     obstaclecontroller.update(obstacle, gameSpeed, frameTimeDelta);
     score.update(frameTimeDelta);
   }
 
-  if(obstacle.collideWith(dino)){
+  if (obstacle.collideWith(dino)) {
     gameOver = true;
     resetEventListeners();
     score.setHighScore();
   }
 
-  if(notStarted){
+  if (notStarted) {
     showStartGame();
   }
 
-  if(gameOver){
+  if (gameOver) {
     showGameOver();
   }
 
-  requestAnimationFrame(gameLoop);
-
+  requestAnimationFrame(gameLoop); // Continue the game loop
 }
-requestAnimationFrame(gameLoop);
-
-window.addEventListener("keyup", (event) => {
-  if (event.key === ' ') {
-    reset();
-  }
-}, { once: true });
-window.addEventListener("touchstart", reset, { once: true });
-module.exports = {setScaleRatio,GAME_WIDTH,GAME_HEIGHT};
