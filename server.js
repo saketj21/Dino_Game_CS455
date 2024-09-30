@@ -6,7 +6,6 @@ import os from 'os';
 
 const app = express();
 const PORT = process.env.PORT || 3002;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -31,5 +30,5 @@ function getLocalIpAddress() {
       }
     }
   }
-  return 'localhost';
+  return'localhost';
 }
