@@ -11,7 +11,9 @@
     "duplication": "npm run prepare-reports-dir && npx jscpd --pattern '**/*.js' --ignore '**/node_modules/**' --min-lines 10 --reporters console --reporters json --output reports/jscpd-report.json"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2",
+    "sqlite": "^4.0.19"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
