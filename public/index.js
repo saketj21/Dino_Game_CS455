@@ -211,11 +211,13 @@ function gameLoop(currentTime) {
     showStartGame();
   }
 
-  if (gameOver && !scoreSent) {
+  if (gameOver) {
     showGameOver();
-    const finalScore = Math.floor(score.score);
-    sendScore(finalScore, playerName);
-    scoreSent = true;
+    if(!scoreSent){
+      const finalScore = Math.floor(score.score);
+      sendScore(finalScore, playerName);
+      scoreSent = true;
+    }
   }
 
   requestAnimationFrame(gameLoop);
