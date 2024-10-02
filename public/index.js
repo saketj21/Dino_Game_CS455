@@ -31,6 +31,7 @@ let obstaclecontroller = null;
 let gameSpeed = GAME_SPEED;
 let eventListenerReset = false;
 let score = null;
+let scoreSent = false;
 
 
 function setScreenSize() {
@@ -128,6 +129,16 @@ function resetEventListeners() {
   }
 }
 
+async function sendScore(score, name) {
+  await fetch('/api/scores', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ score, name })
+  });
+}
+
 function gameLoop(currentTime){
   if (previousTime === null) {
     previousTime = currentTime;
@@ -161,8 +172,12 @@ function gameLoop(currentTime){
     showStartGame();
   }
 
-  if(gameOver){
+  if(gameOver && !scoreSent){
     showGameOver();
+    const playerName = "saket";
+    const finalScore = Math.floor(score.score);
+    sendScore(finalScore, playerName);
+    scoreSent = true;
   }
 
   requestAnimationFrame(gameLoop);
