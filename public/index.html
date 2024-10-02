@@ -24,73 +24,10 @@
       canvas {
         display: block; /* Remove any inline-block spacing */
       }
-
-      /* Style for the name input form */
-      #nameForm {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent overlay */
-        z-index: 1000; /* Ensure it's on top of everything */
-      }
-
-      #nameForm input[type="text"] {
-        padding: 10px;
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-
-      #nameForm button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-      }
     </style>
     <script src="index.js" defer type="module"></script>
   </head>
   <body>
     <canvas id="game"></canvas>
-
-    <!-- Name input form -->
-    <div id="nameForm">
-      <input type="text" id="playerName" placeholder="Enter your name" required />
-      <button id="startGameButton">Start Game</button>
-    </div>
-
-    <script type="module">
-      import { reset, gameLoop } from './index.js';
-    
-      document.getElementById("startGameButton").addEventListener("click", function() {
-        const playerName = document.getElementById("playerName").value;
-        if (playerName) {
-          document.getElementById("nameForm").style.display = "none";
-          startGame(playerName);
-        } else {
-          alert("Please enter your name.");
-        }
-      });
-    
-      function startGame(playerName) {
-        console.log("Game starting for", playerName);
-        window.addEventListener("keyup", (event) => {
-          if (event.key === ' ') {
-            reset();
-          }
-        }, { once: true });
-    
-        window.addEventListener("touchstart", reset, { once: true });
-    
-        requestAnimationFrame(gameLoop); 
-      }
-    </script>
-    
-    
-    
   </body>
 </html>
