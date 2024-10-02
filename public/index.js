@@ -120,15 +120,77 @@ export function showStartGame() {
   ctx.fillText(text, x, y);
 }
 
-function showGameOver() {
-  const fontSize = 70 * scaleRatio;
-  ctx.font = `${fontSize}px Verdana`;
-  ctx.fillStyle = "black";
-  const text = "GAME OVER";
-  const textWidth = ctx.measureText(text).width;
-  const x = (canvas.width - textWidth) / 2;
-  const y = (canvas.height + fontSize) / 2;
-  ctx.fillText(text, x, y);
+// eslint-disable-next-line max-statements
+async function displayScores() {
+
+    let leaderboardContainer = document.createElement('div');
+    leaderboardContainer.id = 'leaderboardContainer';
+    leaderboardContainer.style.position = 'absolute';
+    leaderboardContainer.style.top = '50%';
+    leaderboardContainer.style.left = '50%';
+    leaderboardContainer.style.transform = 'translate(-50%, -50%)';
+    leaderboardContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+    leaderboardContainer.style.border = '2px solid black';
+    leaderboardContainer.style.padding = '20px';
+    leaderboardContainer.style.zIndex = '100';
+    leaderboardContainer.style.textAlign = 'center';
+    leaderboardContainer.style.fontFamily = 'Verdana, sans-serif';
+    leaderboardContainer.style.fontSize = `${20 * scaleRatio}px`;
+
+    const title = document.createElement('h2');
+    title.textContent = 'Leaderboard';
+    title.style.marginBottom = '20px';
+    leaderboardContainer.appendChild(title);
+
+    const leaderboardTable = document.createElement('table');
+    leaderboardTable.style.margin = '0 auto';
+    leaderboardTable.style.width = '100%';
+
+    const tableHeader = document.createElement('thead');
+    tableHeader.innerHTML = `
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>`;
+    leaderboardTable.appendChild(tableHeader);
+
+    const leaderboardBody = document.createElement('tbody');
+    leaderboardBody.id = 'leaderboardBody';
+    leaderboardTable.appendChild(leaderboardBody);
+
+    leaderboardContainer.appendChild(leaderboardTable);
+    document.body.appendChild(leaderboardContainer);
+
+  const scores = await fetchScores();
+  leaderboardBody.innerHTML = ''; 
+
+  scores.forEach((score, index) => {
+    const row = document.createElement('tr');
+
+    const rankCell = document.createElement('td');
+    rankCell.textContent = index + 1;
+
+    const nameCell = document.createElement('td');
+    nameCell.textContent = score.name;
+
+    const scoreCell = document.createElement('td');
+    scoreCell.textContent = score.score;
+
+    row.appendChild(rankCell);
+    row.appendChild(nameCell);
+    row.appendChild(scoreCell);
+
+    leaderboardBody.appendChild(row);
+  });
+}
+
+
+async function fetchScores() {
+  const response = await fetch('/api/scores');
+  const scores = await response.json();
+  console.log("Fetched scores:", scores);
+  return scores;
 }
 
 function objectOnHomeScreen() {
@@ -146,12 +208,17 @@ function objectOnHomeScreen() {
 }
 
 function reset() {
+  scoreSent = false;
   notStarted = false;
   obstacle.x = -canvas.width;
   gameOver = false;
   eventListenerReset = false;
   ground.reset();
   score.reset();
+  const leaderboardContainer = document.getElementById('leaderboardContainer');
+  if (leaderboardContainer) {
+    document.body.removeChild(leaderboardContainer);
+  }
 }
 
 function resetEventListeners() {
@@ -212,12 +279,13 @@ function gameLoop(currentTime) {
   }
 
   if (gameOver) {
-    showGameOver();
     if(!scoreSent){
       const finalScore = Math.floor(score.score);
       sendScore(finalScore, playerName);
       scoreSent = true;
+      displayScores();
     }
+
   }
 
   requestAnimationFrame(gameLoop);
