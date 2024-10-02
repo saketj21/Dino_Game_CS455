@@ -3,12 +3,54 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import os from 'os';
+import { openDb, initializeDb, saveScore, getScores } from './db.js'; // Importing database functions
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+app.use(express.json());
+
+let db;
+
+(async () => {
+  try {
+    db = await openDb();
+    await initializeDb(db);
+    console.log('Database initialized');
+  } catch (error) {
+    console.error('Error initializing the database:', error);
+  }
+})();
+
+app.post('/api/scores', async (req, res) => {
+  const { score, name } = req.body;
+  console.log('Received data:', { score, name });
+
+  if (!name || score == null) {
+    return res.status(400).json({ error: 'Name and score are required' });
+  }
+
+  try {
+    const result = await saveScore(db, score, name);
+    res.status(201).json({ id: result.lastID });
+  } catch (error) {
+    console.error('Error saving score:', error); // Log the actual error
+    res.status(500).json({ error: 'Failed to save score' });
+  }
+});
+
+app.get('/api/scores', async (req, res) => {
+  try {
+    const scores = await getScores(db);
+    res.json(scores);
+  } catch (error) {
+    console.error('Error fetching scores:', error); // Log the actual error
+    res.status(500).json({ error: 'Failed to fetch scores' });
+  }
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,5 +73,5 @@ function getLocalIpAddress() {
       }
     }
   }
-  return 'localhost';
+  return 'localhost';
 }
