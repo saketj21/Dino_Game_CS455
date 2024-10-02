@@ -43,7 +43,6 @@ export default class Dino{
 
     keydown = (event) => {
         if(event.code === "Space"){
-            console.log("not pressed now");
             this.jumpPressed = true;
         }
     };

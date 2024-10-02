@@ -11,7 +11,6 @@ export default class Obstacle{
         for(let i = 1; i <= this.numObstacles; i++){
             let image = new Image();
             image.src =  "./obstacle/obstacle_" + i + ".png";
-            console.log(image.src);
             this.images.push(image);
         }
         this.image_no = 0;
