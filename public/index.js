@@ -126,14 +126,14 @@ async function displayScores() {
   let leaderboardContainer = document.createElement('div');
   leaderboardContainer.id = 'leaderboardContainer';
   leaderboardContainer.style.position = 'absolute';
-  leaderboardContainer.style.top = '8%';
+  leaderboardContainer.style.top = window.height/2-canvas.height/2 + 'px';
   leaderboardContainer.style.left = '0';
-  leaderboardContainer.style.width = '100%';
-  leaderboardContainer.style.height = '78%';
+  leaderboardContainer.style.width = canvas.width + 'px';
+  leaderboardContainer.style.height = canvas.height + 'px';
   leaderboardContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
   leaderboardContainer.style.border = '2px solid black';
   leaderboardContainer.style.padding = '20px';
-  leaderboardContainer.style.zIndex = '1000'; // Ensure it's on top
+  leaderboardContainer.style.zIndex = '1000';
   leaderboardContainer.style.textAlign = 'center';
   leaderboardContainer.style.fontFamily = 'Verdana, sans-serif';
   leaderboardContainer.style.fontSize = `${18 * scaleRatio}px`;
@@ -144,7 +144,7 @@ async function displayScores() {
   
   const title = document.createElement('h2');
   title.textContent = 'Leaderboard';
-  title.style.marginBottom = '20px';
+  title.style.marginBottom = '5%';
   leaderboardContainer.appendChild(title);
   
   const leaderboardTable = document.createElement('table');
