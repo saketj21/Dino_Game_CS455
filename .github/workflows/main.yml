@@ -31,5 +31,14 @@ jobs:
       - name: Run Code Duplication Check
         run: npm run duplication
       
-      - name: Run Jest
-        run: npm test
+      - name: Run Jest with Coverage
+        run: npm test -- --coverage
+
+      - name: Ensure Jest Coverage is Above 75%
+        run: |
+          COVERAGE=$(npx jest --coverage --coverageThreshold='{ "global": { "lines": 75 } }' 2>&1)
+          echo "$COVERAGE"
+          if echo "$COVERAGE" | grep -q 'coverage threshold for lines'; then
+            echo "Test coverage is below 75%. Failing the build."
+            exit 1
+          fi

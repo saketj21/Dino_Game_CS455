@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest --coverage",
+    "test:coverage": "jest --coverage --coverageThreshold='{ \"global\": { \"lines\": 75 } }'",
     "prepare-reports-dir": "mkdir -p reports",
     "duplication": "npm run prepare-reports-dir && npx jscpd --pattern '**/*.js' --ignore '**/node_modules/**' --min-lines 10 --reporters console --reporters json --output reports/jscpd-report.json"
   },
@@ -32,7 +33,12 @@
     "transform": {
       "^.+\\.js$": "babel-jest"
     },
-    "keywords": [],
-    "license": ""
-  }
+    "coverageThreshold": {
+      "global": {
+        "lines": 75
+      }
+    }
+  },
+  "keywords": [],
+  "license": ""
 }
