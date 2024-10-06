@@ -123,47 +123,59 @@ export function showStartGame() {
 // eslint-disable-next-line max-statements
 async function displayScores() {
 
-    let leaderboardContainer = document.createElement('div');
-    leaderboardContainer.id = 'leaderboardContainer';
-    leaderboardContainer.style.position = 'absolute';
-    leaderboardContainer.style.top = '50%';
-    leaderboardContainer.style.left = '50%';
-    leaderboardContainer.style.transform = 'translate(-50%, -50%)';
-    leaderboardContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-    leaderboardContainer.style.border = '2px solid black';
-    leaderboardContainer.style.padding = '20px';
-    leaderboardContainer.style.zIndex = '100';
-    leaderboardContainer.style.textAlign = 'center';
-    leaderboardContainer.style.fontFamily = 'Verdana, sans-serif';
-    leaderboardContainer.style.fontSize = `${20 * scaleRatio}px`;
-
-    const title = document.createElement('h2');
-    title.textContent = 'Leaderboard';
-    title.style.marginBottom = '20px';
-    leaderboardContainer.appendChild(title);
-
-    const leaderboardTable = document.createElement('table');
-    leaderboardTable.style.margin = '0 auto';
-    leaderboardTable.style.width = '100%';
-
-    const tableHeader = document.createElement('thead');
-    tableHeader.innerHTML = `
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>`;
-    leaderboardTable.appendChild(tableHeader);
-
-    const leaderboardBody = document.createElement('tbody');
-    leaderboardBody.id = 'leaderboardBody';
-    leaderboardTable.appendChild(leaderboardBody);
-
-    leaderboardContainer.appendChild(leaderboardTable);
-    document.body.appendChild(leaderboardContainer);
+  let leaderboardContainer = document.createElement('div');
+  leaderboardContainer.id = 'leaderboardContainer';
+  leaderboardContainer.style.position = 'absolute';
+  leaderboardContainer.style.top = '8%';
+  leaderboardContainer.style.left = '0';
+  leaderboardContainer.style.width = '100%';
+  leaderboardContainer.style.height = '78%';
+  leaderboardContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+  leaderboardContainer.style.border = '2px solid black';
+  leaderboardContainer.style.padding = '20px';
+  leaderboardContainer.style.zIndex = '1000'; // Ensure it's on top
+  leaderboardContainer.style.textAlign = 'center';
+  leaderboardContainer.style.fontFamily = 'Verdana, sans-serif';
+  leaderboardContainer.style.fontSize = `${18 * scaleRatio}px`;
+  leaderboardContainer.style.display = 'flex';
+  leaderboardContainer.style.flexDirection = 'column';
+  leaderboardContainer.style.justifyContent = 'center';
+  leaderboardContainer.style.alignItems = 'center';
+  
+  const title = document.createElement('h2');
+  title.textContent = 'Leaderboard';
+  title.style.marginBottom = '20px';
+  leaderboardContainer.appendChild(title);
+  
+  const leaderboardTable = document.createElement('table');
+  leaderboardTable.style.margin = '0 auto';
+  leaderboardTable.style.borderCollapse = 'collapse';
+  leaderboardTable.style.width = '100%';
+  leaderboardTable.style.height = "83%";
+  
+  const tableHeader = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  const headers = ['Rank', 'Name', 'Score'];
+  headers.forEach(headerText => {
+    const th = document.createElement('th');
+    th.textContent = headerText;
+    th.style.border = '1px solid black';
+    th.style.padding = '10px';
+    th.style.backgroundColor = '#f2f2f2';
+    headerRow.appendChild(th);
+  });
+  tableHeader.appendChild(headerRow);
+  leaderboardTable.appendChild(tableHeader);
+  
+  const tableBody = document.createElement('tbody');
+  // Add rows to the table body as needed
+  leaderboardTable.appendChild(tableBody);
+  
+  leaderboardContainer.appendChild(leaderboardTable);
+  document.body.appendChild(leaderboardContainer);
 
   const scores = await fetchScores();
-  leaderboardBody.innerHTML = ''; 
+  tableBody.innerHTML = ''; 
 
   scores.forEach((score, index) => {
     const row = document.createElement('tr');
@@ -181,7 +193,7 @@ async function displayScores() {
     row.appendChild(nameCell);
     row.appendChild(scoreCell);
 
-    leaderboardBody.appendChild(row);
+    tableBody.appendChild(row);
   });
 }
 
