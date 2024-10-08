@@ -32,9 +32,10 @@ let gameSpeed = GAME_SPEED;
 let eventListenerReset = false;
 let score = null;
 let scoreSent = false;
+let nameTaken = false;
 let playerName = "";
 
-// Create and style the form element
+// Form for taking Player's Name
 const formContainer = document.createElement("div");
 formContainer.id = "nameFormContainer";
 formContainer.style.position = "absolute";
@@ -53,20 +54,46 @@ form.style.background = "white";
 form.style.padding = "20px";
 form.style.borderRadius = "10px";
 form.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
+form.style.display = "flex";
+form.style.flexDirection = "column";
+form.style.alignItems = "center";
 
 const label = document.createElement("label");
 label.htmlFor = "playerName";
 label.innerText = "Enter your name:";
+label.style.marginBottom = "10px";
+label.style.fontSize = "16px";
+label.style.fontWeight = "bold";
 
 const input = document.createElement("input");
 input.type = "text";
 input.id = "playerName";
 input.name = "playerName";
 input.required = true;
+input.style.marginBottom = "20px";
+input.style.padding = "10px";
+input.style.border = "1px solid #ccc";
+input.style.borderRadius = "5px";
+input.style.width = "100%";
+input.style.boxSizing = "border-box";
 
 const button = document.createElement("button");
 button.type = "submit";
 button.innerText = "Start Game";
+button.style.padding = "10px 20px";
+button.style.border = "none";
+button.style.borderRadius = "5px";
+button.style.backgroundColor = "#EDC9AF"; // Desert Sand color
+button.style.color = "white";
+button.style.fontSize = "16px";
+button.style.cursor = "pointer";
+button.style.transition = "background-color 0.3s";
+button.addEventListener("mouseover", () => {
+  button.style.backgroundColor = "#D2B48C"; // Darker shade of Desert Sand
+});
+button.addEventListener("mouseout", () => {
+  button.style.backgroundColor = "#EDC9AF";
+});
 
 form.appendChild(label);
 form.appendChild(input);
@@ -77,6 +104,7 @@ document.body.appendChild(formContainer);
 form.addEventListener("submit", function(event) {
   event.preventDefault();
   playerName = document.getElementById("playerName").value;
+  nameTaken = true;
   formContainer.style.display = "none";
   resetEventListeners();
 });
@@ -272,7 +300,7 @@ function gameLoop(currentTime) {
   obstacle.draw();
   score.draw();
 
-  if (!notStarted && !gameOver) {
+  if (!notStarted && !gameOver && nameTaken) {
     background.update(BACKGROUND_SPEED, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
     dino.update(frameTimeDelta);
