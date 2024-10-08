@@ -120,8 +120,12 @@ let groundImage = new Image();
 groundImage.src = "./ground/ground.png";
 let backgroundImage = new Image();
 backgroundImage.src = "./background/background.png";
-await backgroundImage.decode();
-setScreenSize();
+
+async function initializeGame() {
+  await backgroundImage.decode();
+  setScreenSize();
+  requestAnimationFrame(gameLoop);
+}
 
 window.addEventListener("resize", () => setTimeout(setScreenSize, 500));
 
@@ -331,7 +335,7 @@ function gameLoop(currentTime) {
   requestAnimationFrame(gameLoop);
 }
 
-requestAnimationFrame(gameLoop);
+initializeGame();
 
 window.addEventListener("keyup", (event) => {
   if (event.key === ' ') {
