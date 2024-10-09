@@ -203,12 +203,7 @@ function resetEventListeners() {
   if (!eventListenerReset) {
     eventListenerReset = true;
     setTimeout(() => {
-      window.addEventListener("keyup", (event) => {
-        if (event.key === ' ') {
-          reset();
-        }
-      }, { once: true });
-      window.addEventListener("touchstart", reset, { once: true });
+      addGameEventListeners();
     }, 1000);
   }
 }
@@ -270,10 +265,13 @@ function renderEntities() {
 
 initializeGame();
 
-window.addEventListener("keyup", (event) => {
-  if (event.key === ' ') {
-    reset();
-  }
-}, { once: true });
+function addGameEventListeners() {
+  window.addEventListener("keyup", (event) => {
+    if (event.key === ' ') {
+      reset();
+    }
+  }, { once: true });
 
-window.addEventListener("touchstart", reset, { once: true });
+  window.addEventListener("touchstart", reset, { once: true });
+}
+addGameEventListeners();
