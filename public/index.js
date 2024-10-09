@@ -3,6 +3,7 @@ import Dino from "./dino/dino.js";
 import Obstacle from "./obstacle/obstacle.js";
 import ObstacleController from "./obstacle/controller.js";
 import Score from "./score/Score.js";
+import { createPlayerForm } from './nameForm.js'; 
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -32,82 +33,22 @@ let gameSpeed = GAME_SPEED;
 let eventListenerReset = false;
 let score = null;
 let scoreSent = false;
-let nameTaken = false;
 let playerName = "";
+let nameTaken = false;
+let formContainer;
 
-// Form for taking Player's Name
-const formContainer = document.createElement("div");
-formContainer.id = "nameFormContainer";
-formContainer.style.position = "absolute";
-formContainer.style.top = "0";
-formContainer.style.left = "0";
-formContainer.style.width = "100%";
-formContainer.style.height = "100%";
-formContainer.style.background = "rgba(0, 0, 0, 0.5)";
-formContainer.style.display = "flex";
-formContainer.style.justifyContent = "center";
-formContainer.style.alignItems = "center";
-
-const form = document.createElement("form");
-form.id = "nameForm";
-form.style.background = "white";
-form.style.padding = "20px";
-form.style.borderRadius = "10px";
-form.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
-form.style.display = "flex";
-form.style.flexDirection = "column";
-form.style.alignItems = "center";
-
-const label = document.createElement("label");
-label.htmlFor = "playerName";
-label.innerText = "Enter your name:";
-label.style.marginBottom = "10px";
-label.style.fontSize = "16px";
-label.style.fontWeight = "bold";
-
-const input = document.createElement("input");
-input.type = "text";
-input.id = "playerName";
-input.name = "playerName";
-input.required = true;
-input.style.marginBottom = "20px";
-input.style.padding = "10px";
-input.style.border = "1px solid #ccc";
-input.style.borderRadius = "5px";
-input.style.width = "100%";
-input.style.boxSizing = "border-box";
-
-const button = document.createElement("button");
-button.type = "submit";
-button.innerText = "Start Game";
-button.style.padding = "10px 20px";
-button.style.border = "none";
-button.style.borderRadius = "5px";
-button.style.backgroundColor = "#EDC9AF"; // Desert Sand color
-button.style.color = "white";
-button.style.fontSize = "16px";
-button.style.cursor = "pointer";
-button.style.transition = "background-color 0.3s";
-button.addEventListener("mouseover", () => {
-  button.style.backgroundColor = "#D2B48C"; // Darker shade of Desert Sand
-});
-button.addEventListener("mouseout", () => {
-  button.style.backgroundColor = "#EDC9AF";
-});
-
-form.appendChild(label);
-form.appendChild(input);
-form.appendChild(button);
-formContainer.appendChild(form);
-document.body.appendChild(formContainer);
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  playerName = document.getElementById("playerName").value;
-  nameTaken = true;
-  formContainer.style.display = "none";
-  resetEventListeners();
-});
+window.onload = function() {
+  formContainer = createPlayerForm();
+  document.body.appendChild(formContainer);
+  const form = document.querySelector("form");
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    playerName = document.getElementById("playerName").value;
+    nameTaken = true;
+    formContainer.style.display = "none";
+    resetEventListeners();
+  });
+};
 
 function setScreenSize() {
   scaleRatio = setScaleRatio();
