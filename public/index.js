@@ -4,24 +4,12 @@ import Obstacle from "./obstacle/obstacle.js";
 import ObstacleController from "./obstacle/controller.js";
 import Score from "./score/Score.js";
 import { createPlayerForm } from './nameForm.js'; 
-import { fetchScores, sendScore } from './scoreManager.js';
+import { sendScore } from './scoreManager.js';
 import {displayScores} from './leaderboard.js';
+import { GAME_WIDTH, GAME_HEIGHT, GAME_SPEED, GROUND_WIDTH, GROUND_HEIGHT, BACKGROUND_HEIGHT, DINO_WIDTH, DINO_HEIGHT, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, OBSTACLES_NUMBER, BACKGROUND_SPEED } from "./constants.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 300;
-const DINO_HEIGHT = 100;
-const DINO_WIDTH = 100;
-const OBSTACLE_WIDTH = 100;
-const OBSTACLE_HEIGHT = 100;
-const GROUND_WIDTH = 1000;
-const GROUND_HEIGHT = 24;
-const BACKGROUND_HEIGHT = GAME_HEIGHT;
-const BACKGROUND_SPEED = 0.1;
-const GAME_SPEED = 1.0;
-const OBSTACLES_NUMBER = 5;
-
 let scaleRatio = 1;
 let previousTime = null;
 let notStarted = true;

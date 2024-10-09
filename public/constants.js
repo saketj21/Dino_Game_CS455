@@ -1,0 +1,12 @@
+export const GAME_WIDTH = 800;
+export const GAME_HEIGHT = 300;
+export const DINO_HEIGHT = 100;
+export const DINO_WIDTH = 100;
+export const OBSTACLE_WIDTH = 100;
+export const OBSTACLE_HEIGHT = 100;
+export const GROUND_WIDTH = 1000;
+export const GROUND_HEIGHT = 24;
+export const BACKGROUND_HEIGHT = GAME_HEIGHT;
+export const BACKGROUND_SPEED = 0.1;
+export const GAME_SPEED = 1.0;
+export const OBSTACLES_NUMBER = 5;
