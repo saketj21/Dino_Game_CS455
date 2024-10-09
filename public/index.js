@@ -4,6 +4,7 @@ import Obstacle from "./obstacle/obstacle.js";
 import ObstacleController from "./obstacle/controller.js";
 import Score from "./score/Score.js";
 import { createPlayerForm } from './nameForm.js'; 
+import { fetchScores, sendScore } from './scoreManager.js';
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -170,14 +171,6 @@ async function displayScores() {
   });
 }
 
-
-async function fetchScores() {
-  const response = await fetch('/api/scores');
-  const scores = await response.json();
-  console.log("Fetched scores:", scores);
-  return scores;
-}
-
 function objectOnHomeScreen() {
   const groundWidth = GROUND_WIDTH * scaleRatio;
   const groundHeight = GROUND_HEIGHT * scaleRatio;
@@ -218,16 +211,6 @@ function resetEventListeners() {
       window.addEventListener("touchstart", reset, { once: true });
     }, 1000);
   }
-}
-
-async function sendScore(score, name) {
-  await fetch('/api/scores', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ score, name })
-  });
 }
 
 function gameLoop(currentTime) {
