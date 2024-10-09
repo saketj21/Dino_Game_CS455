@@ -219,15 +219,18 @@ function gameLoop(currentTime) {
     requestAnimationFrame(gameLoop);
     return;
   }
+
   const frameTimeDelta = currentTime - previousTime;
   previousTime = currentTime;
 
-  background.draw();
-  ground.draw();
-  dino.draw();
-  obstacle.draw();
-  score.draw();
+  updateEntities(frameTimeDelta);
+  checkCollisions();
+  renderEntities();
 
+  requestAnimationFrame(gameLoop);
+}
+
+function updateEntities(frameTimeDelta) {
   if (!notStarted && !gameOver && nameTaken) {
     background.update(BACKGROUND_SPEED, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
@@ -235,29 +238,35 @@ function gameLoop(currentTime) {
     obstaclecontroller.update(obstacle, gameSpeed, frameTimeDelta);
     score.update(frameTimeDelta);
   }
+}
 
+function checkCollisions() {
   if (obstacle.collideWith(dino)) {
     gameOver = true;
     resetEventListeners();
     score.setHighScore();
   }
+}
+
+function renderEntities() {
+  background.draw();
+  ground.draw();
+  dino.draw();
+  obstacle.draw();
+  score.draw();
 
   if (notStarted) {
     showStartGame();
   }
 
-  if (gameOver) {
-    if(!scoreSent){
-      const finalScore = Math.floor(score.score);
-      sendScore(finalScore, playerName);
-      scoreSent = true;
-      displayScores();
-    }
-
+  if (gameOver && !scoreSent) {
+    const finalScore = Math.floor(score.score);
+    sendScore(finalScore, playerName);
+    scoreSent = true;
+    displayScores();
   }
-
-  requestAnimationFrame(gameLoop);
 }
+
 
 initializeGame();
 
