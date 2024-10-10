@@ -1,4 +1,4 @@
-import { setScaleRatio, showStartGame, initializeGame, setScreenSize, objectOnHomeScreen, reset, resetEventListeners, gameLoop } from './../index.js';
+import { setScaleRatio, showStartGame, initializeGame, setScreenSize, objectOnHomeScreen} from './../index.js';
 import Ground from './../ground/ground.js';
 import Dino from './../dino/dino.js';
 import Obstacle from './../obstacle/obstacle.js';
@@ -14,6 +14,7 @@ jest.mock('./../obstacle/obstacle.js');
 jest.mock('./../obstacle/controller.js');
 jest.mock('./../score/Score.js');
 
+// eslint-disable-next-line max-lines-per-function
 describe('Index Module', () => {
   let canvas, ctx, originalDocument;
 
