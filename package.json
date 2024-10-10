@@ -29,6 +29,7 @@
     "jsdom": "^25.0.0"
   },
   "jest": {
+    "setupFiles": ["./public/test/jest.setup.js"],
     "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.js$": "babel-jest"
