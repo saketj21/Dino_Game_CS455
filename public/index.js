@@ -40,7 +40,7 @@ window.onload = function() {
   });
 };
 
-function setScreenSize() {
+export function setScreenSize() {
   scaleRatio = setScaleRatio();
   canvas.width = GAME_WIDTH * scaleRatio;
   canvas.height = GAME_HEIGHT * scaleRatio;
@@ -52,7 +52,7 @@ groundImage.src = "./ground/ground.png";
 let backgroundImage = new Image();
 backgroundImage.src = "./background/background.png";
 
-async function initializeGame() {
+export async function initializeGame() {
   await backgroundImage.decode();
   setScreenSize();
   requestAnimationFrame(gameLoop);
@@ -60,7 +60,7 @@ async function initializeGame() {
 
 window.addEventListener("resize", () => setTimeout(setScreenSize, 500));
 
-function setScaleRatio() {
+export function setScaleRatio() {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
@@ -71,7 +71,7 @@ function setScaleRatio() {
   }
 }
 
-export function showStartGame() {
+export function showStartGame(ctx, canvas, scaleRatio) {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
   ctx.fillStyle = "black";
@@ -84,7 +84,7 @@ export function showStartGame() {
 }
 
 
-function objectOnHomeScreen() {
+export function objectOnHomeScreen() {
   const groundWidth = GROUND_WIDTH * scaleRatio;
   const groundHeight = GROUND_HEIGHT * scaleRatio;
   const backgroundHeight = BACKGROUND_HEIGHT * scaleRatio;
@@ -164,7 +164,7 @@ function renderEntities() {
   score.draw();
 
   if (notStarted) {
-    showStartGame();
+    showStartGame(ctx, canvas, scaleRatio);
   }
 
   if (gameOver && !scoreSent) {
