@@ -1,6 +1,6 @@
 # Dino_Game_CS455
 
-Demo: https://saketj21.github.io/Dino_Game_CS455/
+Demo: https://dino-game-cs-455.vercel.app/
 
 ## CI/CD Pipeline:
 
