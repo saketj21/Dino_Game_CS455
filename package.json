@@ -15,7 +15,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongodb": "^6.10.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "chromedriver": "^116.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

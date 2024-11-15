@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 def setup_driver():
     chrome_options = Options()
@@ -16,7 +17,7 @@ def setup_driver():
 
     chrome_options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
 
-    service = Service('C:\\chromedriver-win64\\chromedriver.exe')
+    service = Service(ChromeDriverManager().install())
     
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
