@@ -12,13 +12,15 @@
     "duplication": "npm run prepare-reports-dir && npx jscpd --pattern '**/*.js' --ignore '**/node_modules/**' --min-lines 10 --reporters console --reporters json --output reports/jscpd-report.json"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "sqlite3": "^5.0.2",
-    "sqlite": "^4.0.19"
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
+    "artillery": "^1.6.0",
     "babel-jest": "^29.7.0",
     "eslint": "^9.10.0",
     "eslint-plugin-complexity": "^1.0.2",
@@ -29,7 +31,9 @@
     "jsdom": "^25.0.0"
   },
   "jest": {
-    "setupFiles": ["./public/test/jest.setup.js"],
+    "setupFiles": [
+      "./public/test/jest.setup.js"
+    ],
     "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.js$": "babel-jest"

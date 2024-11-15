@@ -3,7 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import os from 'os';
-import { openDb, initializeDb, saveScore, getScores } from './db.js'; // Importing database functions
+import { openDb, initializeDb, saveScore, getScores, closeDb } from './db.js'; // Importing updated database functions
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -13,15 +16,14 @@ const __dirname = dirname(__filename);
 
 app.use(express.json());
 
-let db;
-
 (async () => {
   try {
-    db = await openDb();
-    await initializeDb(db);
+    await openDb();
+    await initializeDb();
     console.log('Database initialized');
   } catch (error) {
     console.error('Error initializing the database:', error);
+    process.exit(1);
   }
 })();
 
@@ -34,20 +36,20 @@ app.post('/api/scores', async (req, res) => {
   }
 
   try {
-    const result = await saveScore(db, score, name);
-    res.status(201).json({ id: result.lastID });
+    const result = await saveScore(name, score);
+    res.status(201).json({ id: result.insertedId });
   } catch (error) {
-    console.error('Error saving score:', error); // Log the actual error
+    console.error('Error saving score:', error);
     res.status(500).json({ error: 'Failed to save score' });
   }
 });
 
 app.get('/api/scores', async (req, res) => {
   try {
-    const scores = await getScores(db);
+    const scores = await getScores();
     res.json(scores);
   } catch (error) {
-    console.error('Error fetching scores:', error); // Log the actual error
+    console.error('Error fetching scores:', error);
     res.status(500).json({ error: 'Failed to fetch scores' });
   }
 });
@@ -61,6 +63,17 @@ app.get('*', (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`Accessible on your network at http://${getLocalIpAddress()}:${PORT}`);
+});
+
+process.on('SIGINT', async () => {
+  try {
+    await closeDb();
+    console.log('Database connection closed');
+    process.exit(0);
+  } catch (error) {
+    console.error('Error during shutdown:', error);
+    process.exit(1);
+  }
 });
 
 function getLocalIpAddress() {
