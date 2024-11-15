@@ -2,7 +2,6 @@
 import { fetchScores } from './scoreManager.js';
 
 export async function displayScores(scaleRatio, canvas) {
-  // Create the leaderboard container
   const leaderboardContainer = document.createElement('div');
   leaderboardContainer.id = 'leaderboardContainer';
   leaderboardContainer.style.position = 'absolute';
@@ -21,14 +20,10 @@ export async function displayScores(scaleRatio, canvas) {
   leaderboardContainer.style.flexDirection = 'column';
   leaderboardContainer.style.justifyContent = 'center';
   leaderboardContainer.style.alignItems = 'center';
-
-  // Add title to the leaderboard
   const title = document.createElement('h2');
   title.textContent = 'Leaderboard';
   title.style.marginBottom = '5%';
   leaderboardContainer.appendChild(title);
-
-  // Create the leaderboard table
   const leaderboardTable = document.createElement('table');
   leaderboardTable.style.margin = '0 auto';
   leaderboardTable.style.borderCollapse = 'collapse';
