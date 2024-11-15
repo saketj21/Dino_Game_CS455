@@ -20,15 +20,18 @@ export async function displayScores(scaleRatio, canvas) {
   leaderboardContainer.style.flexDirection = 'column';
   leaderboardContainer.style.justifyContent = 'center';
   leaderboardContainer.style.alignItems = 'center';
+
   const title = document.createElement('h2');
   title.textContent = 'Leaderboard';
   title.style.marginBottom = '5%';
   leaderboardContainer.appendChild(title);
+
   const leaderboardTable = document.createElement('table');
   leaderboardTable.style.margin = '0 auto';
   leaderboardTable.style.borderCollapse = 'collapse';
   leaderboardTable.style.width = '100%';
   leaderboardTable.style.height = "83%";
+
   const tableHeader = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const headers = ['Rank', 'Name', 'Score'];
@@ -53,40 +56,45 @@ export async function displayScores(scaleRatio, canvas) {
     const response = await fetchScores();
     console.log('Fetched scores:', response);
 
-    if (response.success && Array.isArray(response.scores)) {
-      const scores = response.scores; // Extract the scores array
-      tableBody.innerHTML = ''; // Clear any existing content
+    let scores = [];
+
+    if (Array.isArray(response)) {
+      scores = response;
+      console.log('Scores are an array:', scores);
+    } else if (response && Array.isArray(response.scores)) {
+      scores = response.scores;
+      console.log('Scores are within response.scores:', scores);
+    } else {
+      console.error('Invalid scores data structure:', response);
+    }
+
+    if (Array.isArray(scores)) {
+      tableBody.innerHTML = '';
+
       scores.forEach((score, index) => {
         const row = document.createElement('tr');
 
         const rankCell = document.createElement('td');
         rankCell.textContent = index + 1;
-        rankCell.style.border = '1px solid black';
-        rankCell.style.padding = '8px';
-        
+
         const nameCell = document.createElement('td');
         nameCell.textContent = score.name;
-        nameCell.style.border = '1px solid black';
-        nameCell.style.padding = '8px';
-        
+
         const scoreCell = document.createElement('td');
         scoreCell.textContent = score.score;
-        scoreCell.style.border = '1px solid black';
-        scoreCell.style.padding = '8px';
 
         row.appendChild(rankCell);
         row.appendChild(nameCell);
         row.appendChild(scoreCell);
 
+        leaderboardTable.appendChild(row);
         tableBody.appendChild(row);
       });
+
     } else {
-      // Handle cases where the response structure is unexpected
-      console.error('Invalid scores data:', response);
       tableBody.innerHTML = '<tr><td colspan="3">No scores available</td></tr>';
     }
   } catch (error) {
-    // Handle fetch or processing errors
     console.error('Error fetching scores:', error);
     tableBody.innerHTML = '<tr><td colspan="3">Failed to load scores</td></tr>';
   }
