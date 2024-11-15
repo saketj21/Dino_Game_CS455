@@ -71,3 +71,22 @@ export async function closeDb() {
     console.error('Error closing MongoDB connection:', error);
   }
 }
+
+export default async function handler(req, res) {
+  try {
+    await openDb();
+
+    if (req.method === 'POST') {
+      const { name, score } = req.body;
+      const result = await saveScore(name, score);
+      return res.status(201).json({ success: true, result });
+    } else if (req.method === 'GET') {
+      const scores = await getScores();
+      return res.status(200).json({ success: true, scores });
+    } else {
+      return res.status(405).json({ success: false, message: 'Method Not Allowed' });
+    }
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
