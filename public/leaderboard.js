@@ -2,6 +2,7 @@
 import { fetchScores } from './scoreManager.js';
 
 export async function displayScores(scaleRatio, canvas) {
+  // Create the leaderboard container
   const leaderboardContainer = document.createElement('div');
   leaderboardContainer.id = 'leaderboardContainer';
   leaderboardContainer.style.position = 'absolute';
@@ -21,17 +22,20 @@ export async function displayScores(scaleRatio, canvas) {
   leaderboardContainer.style.justifyContent = 'center';
   leaderboardContainer.style.alignItems = 'center';
 
+  // Add title to the leaderboard
   const title = document.createElement('h2');
   title.textContent = 'Leaderboard';
   title.style.marginBottom = '5%';
   leaderboardContainer.appendChild(title);
 
+  // Create the leaderboard table
   const leaderboardTable = document.createElement('table');
   leaderboardTable.style.margin = '0 auto';
   leaderboardTable.style.borderCollapse = 'collapse';
   leaderboardTable.style.width = '100%';
   leaderboardTable.style.height = "83%";
 
+  // Create table headers
   const tableHeader = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const headers = ['Rank', 'Name', 'Score'];
@@ -46,31 +50,57 @@ export async function displayScores(scaleRatio, canvas) {
   tableHeader.appendChild(headerRow);
   leaderboardTable.appendChild(tableHeader);
 
+  // Create table body
   const tableBody = document.createElement('tbody');
   leaderboardTable.appendChild(tableBody);
 
+  // Append table to container and container to the document
   leaderboardContainer.appendChild(leaderboardTable);
   document.body.appendChild(leaderboardContainer);
 
-  const scores = await fetchScores();
-  tableBody.innerHTML = '';
+  try {
+    // Fetch scores from the API
+    const response = await fetchScores();
+    console.log('Fetched scores:', response);
 
-  scores.forEach((score, index) => {
-    const row = document.createElement('tr');
+    // Validate the response structure
+    if (response.success && Array.isArray(response.scores)) {
+      const scores = response.scores; // Extract the scores array
+      tableBody.innerHTML = ''; // Clear any existing content
 
-    const rankCell = document.createElement('td');
-    rankCell.textContent = index + 1;
+      // Populate the table with scores
+      scores.forEach((score, index) => {
+        const row = document.createElement('tr');
 
-    const nameCell = document.createElement('td');
-    nameCell.textContent = score.name;
+        const rankCell = document.createElement('td');
+        rankCell.textContent = index + 1;
+        rankCell.style.border = '1px solid black';
+        rankCell.style.padding = '8px';
+        
+        const nameCell = document.createElement('td');
+        nameCell.textContent = score.name;
+        nameCell.style.border = '1px solid black';
+        nameCell.style.padding = '8px';
+        
+        const scoreCell = document.createElement('td');
+        scoreCell.textContent = score.score;
+        scoreCell.style.border = '1px solid black';
+        scoreCell.style.padding = '8px';
 
-    const scoreCell = document.createElement('td');
-    scoreCell.textContent = score.score;
+        row.appendChild(rankCell);
+        row.appendChild(nameCell);
+        row.appendChild(scoreCell);
 
-    row.appendChild(rankCell);
-    row.appendChild(nameCell);
-    row.appendChild(scoreCell);
-
-    tableBody.appendChild(row);
-  });
+        tableBody.appendChild(row);
+      });
+    } else {
+      // Handle cases where the response structure is unexpected
+      console.error('Invalid scores data:', response);
+      tableBody.innerHTML = '<tr><td colspan="3">No scores available</td></tr>';
+    }
+  } catch (error) {
+    // Handle fetch or processing errors
+    console.error('Error fetching scores:', error);
+    tableBody.innerHTML = '<tr><td colspan="3">Failed to load scores</td></tr>';
+  }
 }
