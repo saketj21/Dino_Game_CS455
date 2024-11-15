@@ -2,7 +2,6 @@
 import { fetchScores } from './scoreManager.js';
 
 export async function displayScores(scaleRatio, canvas) {
-  // Create the leaderboard container
   const leaderboardContainer = document.createElement('div');
   leaderboardContainer.id = 'leaderboardContainer';
   leaderboardContainer.style.position = 'absolute';
@@ -21,21 +20,15 @@ export async function displayScores(scaleRatio, canvas) {
   leaderboardContainer.style.flexDirection = 'column';
   leaderboardContainer.style.justifyContent = 'center';
   leaderboardContainer.style.alignItems = 'center';
-
-  // Add title to the leaderboard
   const title = document.createElement('h2');
   title.textContent = 'Leaderboard';
   title.style.marginBottom = '5%';
   leaderboardContainer.appendChild(title);
-
-  // Create the leaderboard table
   const leaderboardTable = document.createElement('table');
   leaderboardTable.style.margin = '0 auto';
   leaderboardTable.style.borderCollapse = 'collapse';
   leaderboardTable.style.width = '100%';
   leaderboardTable.style.height = "83%";
-
-  // Create table headers
   const tableHeader = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const headers = ['Rank', 'Name', 'Score'];
@@ -50,25 +43,19 @@ export async function displayScores(scaleRatio, canvas) {
   tableHeader.appendChild(headerRow);
   leaderboardTable.appendChild(tableHeader);
 
-  // Create table body
   const tableBody = document.createElement('tbody');
   leaderboardTable.appendChild(tableBody);
 
-  // Append table to container and container to the document
   leaderboardContainer.appendChild(leaderboardTable);
   document.body.appendChild(leaderboardContainer);
 
   try {
-    // Fetch scores from the API
     const response = await fetchScores();
     console.log('Fetched scores:', response);
 
-    // Validate the response structure
     if (response.success && Array.isArray(response.scores)) {
       const scores = response.scores; // Extract the scores array
       tableBody.innerHTML = ''; // Clear any existing content
-
-      // Populate the table with scores
       scores.forEach((score, index) => {
         const row = document.createElement('tr');
 
