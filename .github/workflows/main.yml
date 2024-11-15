@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      - name: Install webdriver-manager
-        run: pip install webdriver-manager
+      - name: Install performance dependencies
+        run: pip install webdriver-manager, selenium
 
       - name: Run ESLint
         run: npm run lint
