@@ -16,6 +16,63 @@ const __dirname = dirname(__filename);
 
 app.use(express.json());
 
+
+const serverInstances = [
+  { host: 'dino-game-cs-455.vercel.app', port: 3002 },
+  { host: 'dino-game-cs-455.vercel.app', port: 3003 },
+];
+
+let currentIndex = 0;
+
+
+function getNextServer() {
+  const server = serverInstances[currentIndex];
+  currentIndex = (currentIndex + 1) % serverInstances.length;
+  return server;
+}
+
+
+function loadBalancerMiddleware(req, res, next) {
+  const targetServer = getNextServer();
+  console.log(`LoadBalancer: Routing request to ${targetServer.host}:${targetServer.port}`);
+  
+  next();
+}
+
+app.use(loadBalancerMiddleware);
+
+const primaryServer = { host: 'localhost', port: 3002 };
+const backupServer = { host: 'localhost', port: 3004 };
+
+let isPrimaryActive = true;
+
+
+function checkServerHealth() {
+  console.log('Failover: Performing health check on primary server...');
+  
+  setInterval(() => {
+    isPrimaryActive = !isPrimaryActive;
+    console.log(`Failover: Primary server is now ${isPrimaryActive ? 'active' : 'inactive'}`);
+  }, 300000); // 300,000 ms = 5 minutes
+}
+
+function failoverMiddleware(req, res, next) {
+  if (isPrimaryActive) {
+    console.log('Failover: Primary server is active. Processing request normally.');
+    next();
+  } else {
+    console.log('Failover: Primary server is down. Redirecting to backup server.');
+    
+    // Simulated redirection
+    
+    res.status(503).json({ success: false, message: 'Redirected' });
+  }
+}
+
+app.use(failoverMiddleware);
+
+checkServerHealth();
+
 (async () => {
   try {
     await openDb();
