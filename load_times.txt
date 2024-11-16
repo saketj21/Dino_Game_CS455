@@ -1,0 +1,67 @@
+2024-11-13 13:52:04 - 0.91s
+2024-11-13 14:07:06 - Load Time: 0.52s - Total Assets Size: 5851.64KB
+Top 10 Largest Assets:
+http://localhost:3002/background/background.png - 5726.97 KB - image/png - 200
+http://localhost:3002/ground/ground.png - 99.95 KB - image/png - 200
+http://localhost:3002/index.js - 5.73 KB - application/javascript - 200
+http://localhost:3002/leaderboard.js - 3.17 KB - application/javascript - 200
+http://localhost:3002/nameForm.js - 2.40 KB - application/javascript - 200
+http://localhost:3002/dino/dino.js - 1.88 KB - application/javascript - 200
+http://localhost:3002/ - 1.69 KB - text/html - 200
+http://localhost:3002/favicon.ico - 1.69 KB - text/html - 200
+http://localhost:3002/score/Score.js - 1.55 KB - application/javascript - 200
+http://localhost:3002/obstacle/obstacle.js - 1.53 KB - application/javascript - 200
+
+2024-11-14 02:41:38 - 1.52s
+2024-11-14 02:42:38 - Load Time: 3.62s - Total Assets Size: 5840.30KB
+Top 10 Largest Assets:
+https://dino-game-cs-455.vercel.app/background/background.png - 5729.99 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/ground/ground.png - 99.92 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/index.js - 1.85 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/dino/move.js - 1.10 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/leaderboard.js - 0.98 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/ground/ground.js - 0.96 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/obstacle/controller.js - 0.89 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/ - 0.87 KB - text/html - 200
+https://dino-game-cs-455.vercel.app/nameForm.js - 0.83 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/dino/dino.js - 0.67 KB - application/javascript - 200
+
+2024-11-15 19:32:12 - Load Time: 2.30s - Total Assets Size: 6185.92KB
+Top 10 Largest Assets:
+https://dino-game-cs-455.vercel.app/background/background.png - 5730.07 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/dino/dino_run_3.png - 173.54 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/dino/dino_run_1.png - 171.94 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/ground/ground.png - 99.86 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/index.js - 1.85 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/dino/move.js - 1.10 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/leaderboard.js - 0.98 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/ground/ground.js - 0.96 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/obstacle/controller.js - 0.90 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/ - 0.87 KB - text/html - 200
+
+2024-11-15 19:41:04 - Load Time: 1.88s - Total Assets Size: 7166.10KB
+Top 10 Largest Assets:
+https://dino-game-cs-455.vercel.app/background/background.png - 5730.08 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/obstacle/obstacle_1.png - 195.19 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/obstacle/obstacle_2.png - 192.57 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/obstacle/obstacle_4.png - 190.90 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/obstacle/obstacle_5.png - 176.17 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/dino/dino_run_3.png - 173.54 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/dino/dino_run_1.png - 171.90 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/dino/dino_run_2.png - 171.57 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/ground/ground.png - 99.86 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/obstacle/obstacle_3.png - 53.82 KB - image/png - 200
+
+2024-11-15 20:05:16 - Load Time: 5.27s - Total Assets Size: 5840.44KB
+Top 10 Largest Assets:
+https://dino-game-cs-455.vercel.app/background/background.png - 5730.00 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/ground/ground.png - 99.94 KB - image/png - 200
+https://dino-game-cs-455.vercel.app/index.js - 1.85 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/dino/move.js - 1.10 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/leaderboard.js - 0.98 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/ground/ground.js - 0.97 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/obstacle/controller.js - 0.89 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/ - 0.87 KB - text/html - 200
+https://dino-game-cs-455.vercel.app/nameForm.js - 0.83 KB - application/javascript - 200
+https://dino-game-cs-455.vercel.app/dino/dino.js - 0.67 KB - application/javascript - 200
+

@@ -1,0 +1,26 @@
+config:
+  target: "https://dino-game-cs-455.vercel.app/"
+  phases:
+    - duration: 240
+      arrivalRate: 25 
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  processor: "./helper.cjs"
+
+scenarios:
+  - name: "Load Game Page"
+    flow:
+      - get:
+          url: "/"
+  - name: "Load Leaderboard Page"
+    flow:
+      - get:
+          url: "/leaderboard"
+  - name: "Submit Score"
+    flow:
+      - post:
+          url: "/api/scores"
+          json:
+            name: "{{ randomName() }}"
+            score: "{{ randomInt(0, 100) }}"
