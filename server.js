@@ -53,17 +53,15 @@ function checkServerHealth() {
   setInterval(() => {
     isPrimaryActive = !isPrimaryActive;
     console.log(`Failover: Primary server is now ${isPrimaryActive ? 'active' : 'inactive'}`);
-  }, 300000); // 300,000 ms = 5 minutes
+  }, 300000);
 }
 
 function failoverMiddleware(req, res, next) {
   if (isPrimaryActive) {
-    console.log('Failover: Primary server is active. Processing request normally.');
+    console.log(`Failover: Primary server is active. Processing request normally at ${primaryServer.host}:${primaryServer.port}.`);
     next();
   } else {
-    console.log('Failover: Primary server is down. Redirecting to backup server.');
-    
-    // Simulated redirection
+    console.log(`Failover: Primary server is down. Redirecting to backup server at ${backupServer.host}:${backupServer.port}.`);
     
     res.status(503).json({ success: false, message: 'Redirected' });
   }
