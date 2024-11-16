@@ -39,6 +39,9 @@ jobs:
 
       - name: client side performance testing
         run: python perf_testing.py
+      
+      - name: server side performance testing
+        run: artillery run load_test.yml
 
       - name: Ensure Jest Coverage is Above 75%
         run: |

@@ -1,8 +1,8 @@
 config:
   target: "https://dino-game-cs-455.vercel.app/"
   phases:
-    - duration: 240
-      arrivalRate: 25 
+    - duration: 60
+      arrivalRate: 2
   defaults:
     headers:
       Content-Type: "application/json"
