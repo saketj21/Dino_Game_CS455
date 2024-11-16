@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
           
       - name: npm update
-        run: npm install -g npm@10.8.3
+        run: npm install -g npm@10.8.3 artillery
 
       - name: Install dependencies
         run: npm install
